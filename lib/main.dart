@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/helpcenter.dart';
+import 'package:lawyer_app/home.dart';
 import 'package:lawyer_app/onboarding.dart';
 import 'package:lawyer_app/signup.dart';
 import 'package:lawyer_app/splashscreen.dart';
+import 'package:lawyer_app/verifyaccount.dart';
+import 'package:lawyer_app/yoursaving.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
         
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Signup(),
+      home: Home(),
     );
   }
 }
