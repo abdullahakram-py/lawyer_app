@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/helpcenter.dart';
+import 'package:lawyer_app/history.dart';
 import 'package:lawyer_app/home.dart';
 import 'package:lawyer_app/onboarding.dart';
 import 'package:lawyer_app/qrscreen.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:Topup2(), 
+      home:Topup2(),
     );
   }
 }

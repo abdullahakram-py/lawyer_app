@@ -11,7 +11,12 @@ class _Topup2State extends State<Topup2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body:Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+               Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -22,7 +27,7 @@ class _Topup2State extends State<Topup2> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,  
-            color: Color.fromARGB(175, 153, 153, 153),
+            
             child: Column(
               spacing: 10,
               
@@ -302,6 +307,28 @@ class _Topup2State extends State<Topup2> {
         ),
         ),
     
+    Container(
+       height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: const Color.fromARGB(167, 0, 0, 0),
+    ),
+    Positioned(
+      top: 0,
+      bottom: 0,
+      child: Center(
+        child: Container(
+         height: MediaQuery.of(context).size.height*0.5,
+            width: MediaQuery.of(context).size.width,    
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white
+            ),  
+        ),
+      ),
+    )
+            ],
+          ),
+        )
     );
   }
 }
