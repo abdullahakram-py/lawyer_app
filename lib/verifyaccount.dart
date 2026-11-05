@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/onboarding.dart';
 
 class Verifyaccount extends StatefulWidget {
   const new({super.key});
@@ -13,8 +14,7 @@ class _VerifyaccountState extends State<Verifyaccount> {
     return Scaffold(
       body: Center(
         child: Column(
-          spacing: 50,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(),
         
@@ -111,21 +111,26 @@ class _VerifyaccountState extends State<Verifyaccount> {
                     ),
                 ],
               ),
-                  Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: Color.fromARGB(255, 16, 13, 64),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Onboarding()));
+                    },
+                    child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                    height: 45,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: Color.fromARGB(255, 16, 13, 64),
+                    ),
+                    child: Center(
+                      child: Text('Verify Now',style: TextStyle(fontSize: 16,color:Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold
+                                  ),),
+                    ),
+                                    ),
+                                  ),
                   ),
-                  child: Center(
-                    child: Text('Verify Now',style: TextStyle(fontSize: 16,color:Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold
-                                ),),
-                  ),
-                ),
-              ),
           ],
         ),
       ),

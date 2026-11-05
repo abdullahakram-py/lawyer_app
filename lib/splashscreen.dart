@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/home.dart';
 
 class Splashscreen extends StatefulWidget {
   const new({super.key});
@@ -8,6 +9,13 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 2), () {
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
+});
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

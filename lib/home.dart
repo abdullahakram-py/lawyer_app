@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/history.dart';
+import 'package:lawyer_app/profilescreen.dart';
+import 'package:lawyer_app/yoursaving.dart';
 
 class Home extends StatefulWidget {
   const new({super.key});
@@ -20,6 +23,7 @@ class _HomeState extends State<Home> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             spacing: 10,
           children: [
           Row(
@@ -29,9 +33,9 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Welcome Back!',style: TextStyle(fontSize: 14,color: Color.fromARGB(255, 255, 255, 255)),
-                          ),
-                          Text('Muhammad Abdullah',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
-                          ),
+                    ),
+                    Text('Muhammad Abdullah',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
                 ],
               ),
                       Icon(Icons.notifications_active_outlined,color: Color.fromARGB(255, 255, 255, 255),)
@@ -189,7 +193,12 @@ class _HomeState extends State<Home> {
                 children: [
                   Text('Your Saving',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 16, 13, 64)),
                           ),
-                          Text('View all',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 16, 13, 64)),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Yoursaving()));
+                            },
+                            child: Text('View all',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 16, 13, 64)),
+                            ),
                           ),
                 ],
               ),
@@ -224,9 +233,9 @@ class _HomeState extends State<Home> {
                         ),
                         Image.network("https://cdn-icons-png.flaticon.com/512/13308/13308717.png",color: Color.fromARGB(255, 16, 13, 64),height: 50,)
                   ],
-                               ),
-                             ),
-               ),),
+                      ),
+                        ),
+                ),),
               Container(
                 height: 58,
                 width: MediaQuery.of(context).size.width,
@@ -248,7 +257,11 @@ class _HomeState extends State<Home> {
                       ),
                       Column(
                         children: [
-                          Icon(Icons.history_rounded,color:Color.fromARGB(255, 16, 13, 64) ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>History()));
+                            },
+                            child: Icon(Icons.history_rounded,color:Color.fromARGB(255, 16, 13, 64) )),
                             Text('History',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 51, 51, 51)),
                           ),
                         ],
@@ -262,7 +275,12 @@ class _HomeState extends State<Home> {
                       ),
                       Column(
                         children: [
-                          Icon(Icons.verified_user_outlined,color:Color.fromARGB(255, 16, 13, 64) ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,MaterialPageRoute(builder: (context)=>Profilescreen())); 
+
+                            },
+                            child: Icon(Icons.verified_user_outlined,color:Color.fromARGB(255, 16, 13, 64) )),
                             Text('Verified users',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 51, 51, 51)),
                           ),
                         ],

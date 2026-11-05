@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/home.dart';
 
 class Profilescreen extends StatefulWidget {
   const new({super.key});
@@ -11,6 +12,7 @@ class _ProfilescreenState extends State<Profilescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
         body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -171,7 +173,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                                                                               ),
                                                 ],
                                               ), 
-                                                                            Icon(Icons.arrow_forward_ios,color: Color.fromARGB(255, 16, 13, 64))
+                                                                            Icon(Icons.arrow_forward_ios,size: 15,color: Color.fromARGB(255, 16, 13, 64))
                                               ],
                                             ),
                                           )
@@ -328,7 +330,11 @@ class _ProfilescreenState extends State<Profilescreen> {
                       children: [
                         Column(
                           children: [
-                            Icon(Icons.home_filled,color:Color.fromARGB(255, 16, 13, 64) ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+                              },
+                              child: Icon(Icons.home_filled,color:Color.fromARGB(255, 16, 13, 64) )),
                             Text('Home',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 51, 51, 51)),
                             ),
                           ],

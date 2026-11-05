@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/home.dart';
 
 class Yoursaving extends StatefulWidget {
   const new({super.key});
@@ -12,7 +13,11 @@ class _YoursavingState extends State<Yoursaving> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios,color: Color.fromARGB(255, 16, 13, 64),),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+          },
+          child: Icon(Icons.arrow_back_ios,color: Color.fromARGB(255, 16, 13, 64),)),
         title: Center(
           child: Text('Your Saving',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 51, 51, 51)),
                 ),
