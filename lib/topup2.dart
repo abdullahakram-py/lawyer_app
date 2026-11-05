@@ -316,13 +316,40 @@ class _Topup2State extends State<Topup2> {
       top: 0,
       bottom: 0,
       child: Center(
-        child: Container(
-         height: MediaQuery.of(context).size.height*0.5,
-            width: MediaQuery.of(context).size.width,    
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white
-            ),  
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: MediaQuery.of(context).size.height*0.5,
+              width: MediaQuery.of(context).size.width,    
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white
+              ), 
+             child: Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.network("https://cdn-icons-png.flaticon.com/512/3580/3580154.png",height: 150,),
+                  Text('Want to logout',style: TextStyle(fontSize: 32,color:Color.fromARGB(255, 16, 13, 64),fontWeight: FontWeight.bold
+                                        ),),
+                    Text('You will back to early app \n if you click the logoutbutton',style: TextStyle(fontSize: 12,color:Color.fromARGB(255, 16, 13, 64),fontWeight: FontWeight.bold ),),
+                                    Container(
+                    height: 45,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: Color.fromARGB(255, 16, 13, 64),
+                    ),
+                    child: Center(
+                      child: Text('Logout',style: TextStyle(fontSize: 16,color:Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold
+                                  ),),
+                    ),
+                  ),
+                ],
+               ),
+             ), 
+          ),
         ),
       ),
     )

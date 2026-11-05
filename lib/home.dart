@@ -140,44 +140,50 @@ class _HomeState extends State<Home> {
                 ],
               ),
               Container(
-                height: 200,
-                width: 327,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Color.fromARGB(255, 16, 13, 64)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                        
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Payment Card',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 255, 255, 255)),
-                                  ),
-                                  Image.network("https://cdn.iconscout.com/icon/free/png-256/free-mastercard-logo-icon-svg-download-png-2944982.png?f=webp",height: 20,)
-                            ],
-                          ),
-                        
-                        Text('2298 1268 3398 9874',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('\$2885.00',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
-                                      ),
-                                      Text('12/24',style: TextStyle(fontSize: 14,color: Color.fromARGB(255, 255, 255, 255)),
-                                      ),
-                                    ],
-                                  ),
-                                    
-                    ],
+                height:200 ,
+                child:ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Container(
+                  height: 200,
+                  width: 327,
+                  margin: EdgeInsets.only(right: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Color.fromARGB(255, 16, 13, 64)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Payment Card',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 255, 255, 255)),
+                                    ),
+                                    Image.network("https://cdn.iconscout.com/icon/free/png-256/free-mastercard-logo-icon-svg-download-png-2944982.png?f=webp",height: 20,)
+                              ],
+                            ),
+                          
+                          Text('2298 1268 3398 9874',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('\$2885.00',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
+                                        ),
+                                        Text('12/24',style: TextStyle(fontSize: 14,color: Color.fromARGB(255, 255, 255, 255)),
+                                        ),
+                                      ],
+                                    ),
+                                      
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              ),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -187,35 +193,40 @@ class _HomeState extends State<Home> {
                           ),
                 ],
               ),
-               Container(
-              height: 80,
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 48,
-                    width: 48,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(255, 242, 242, 242),
-                    ),
-                    child: Center(child: Image.network('https://png.pngtree.com/png-vector/20250221/ourmid/pngtree-top-quality-playstation-5-console-isolated-png-image_15514648.png',color: .fromARGB(255, 16, 13, 64),height: 40, )),
-                    ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Buy Play Station',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 16, 13, 64)),
-                          ),
-                            Text('Slim 2TB 5G Games',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 51, 51, 51)),
-                          ),
-                        ],
+                Container(
+                height: 80,
+                  child:ListView.builder(
+                  
+                  itemBuilder: (context, index) => Container(
+                    height: 80,
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Color.fromARGB(255, 242, 242, 242),
                       ),
-                      Image.network("https://cdn-icons-png.flaticon.com/512/13308/13308717.png",color: Color.fromARGB(255, 16, 13, 64),height: 50,)
-                ],
-              ),
-            ),
+                      child: Center(child: Image.network('https://png.pngtree.com/png-vector/20250221/ourmid/pngtree-top-quality-playstation-5-console-isolated-png-image_15514648.png',color: .fromARGB(255, 16, 13, 64),height: 40, )),
+                      ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Buy Play Station',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 16, 13, 64)),
+                            ),
+                              Text('Slim 2TB 5G Games',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 51, 51, 51)),
+                            ),
+                          ],
+                        ),
+                        Image.network("https://cdn-icons-png.flaticon.com/512/13308/13308717.png",color: Color.fromARGB(255, 16, 13, 64),height: 50,)
+                  ],
+                               ),
+                             ),
+               ),),
               Container(
                 height: 58,
                 width: MediaQuery.of(context).size.width,
