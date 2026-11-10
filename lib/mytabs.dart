@@ -20,9 +20,9 @@ class _MyTabsState extends State<MyTabs> {
             Tab(
               child: Text("Home"),
             ),
-               Tab(
+            Tab(
               child: Text("Home2"),
-            )
+            ),
           ]),
         ),
         body: TabBarView(children: [
