@@ -1,13 +1,14 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/app_colors.dart';
+import 'package:lawyer_app/app_icons.dart';
 import 'package:lawyer_app/app_text_styles.dart';
 import 'package:lawyer_app/history.dart';
 import 'package:lawyer_app/profilescreen.dart';
 import 'package:lawyer_app/yoursaving.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class Home extends StatefulWidget {
   const new({super.key});
@@ -332,11 +333,7 @@ class _HomeHeader extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Icon(
-                  PhosphorIcons.bellSimple(PhosphorIconsStyle.regular),
-                  color: AppColors.textPrimary,
-                  size: 22,
-                ),
+                Icon(AppIcons.bell, color: AppColors.textPrimary, size: 22),
                 Positioned(
                   top: 10,
                   right: 10,
@@ -442,7 +439,7 @@ class BalanceCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       Icon(
-                        PhosphorIcons.eye(PhosphorIconsStyle.regular),
+                        AppIcons.eye,
                         color: AppColors.textSecondary,
                         size: 20,
                       ),
@@ -462,28 +459,28 @@ class BalanceCard extends StatelessWidget {
                       Expanded(
                         child: ActionButton(
                           label: 'Send',
-                          icon: PhosphorIconsRegular.arrowUpRight,
+                          icon: AppIcons.arrowUpRight,
                           index: 0,
                         ),
                       ),
                       Expanded(
                         child: ActionButton(
                           label: 'Request',
-                          icon: PhosphorIconsRegular.arrowDownLeft,
+                          icon: AppIcons.arrowDownLeft,
                           index: 1,
                         ),
                       ),
                       Expanded(
                         child: ActionButton(
                           label: 'Pay',
-                          icon: PhosphorIconsRegular.scan,
+                          icon: AppIcons.scan,
                           index: 2,
                         ),
                       ),
                       Expanded(
                         child: ActionButton(
                           label: 'Top up',
-                          icon: PhosphorIconsRegular.plusCircle,
+                          icon: AppIcons.plusCircle,
                           index: 3,
                         ),
                       ),
@@ -764,7 +761,7 @@ class _BankCardState extends State<BankCard>
     super.initState();
     _shineController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 28),
     )..repeat();
   }
 
@@ -809,7 +806,7 @@ class _BankCardState extends State<BankCard>
                       animation: _shineController,
                       builder: (context, child) {
                         final drift = math.sin(
-                          _shineController.value * math.pi * 2,
+                          _shineController.value * math.pi * 2 * 4,
                         );
                         return Stack(
                           children: [
@@ -853,7 +850,8 @@ class _BankCardState extends State<BankCard>
                       child: AnimatedBuilder(
                         animation: _shineController,
                         builder: (context, child) {
-                          final offset = -1.6 + _shineController.value * 3.2;
+                          final sweep = (_shineController.value * 7) % 1;
+                          final offset = -1.6 + sweep * 3.2;
                           return DecoratedBox(
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -900,7 +898,8 @@ class _BankCardState extends State<BankCard>
                                             .sin(
                                               _shineController.value *
                                                   math.pi *
-                                                  2,
+                                                  2 *
+                                                  4,
                                             )
                                             .abs() *
                                         .24,
@@ -910,9 +909,7 @@ class _BankCardState extends State<BankCard>
                             ),
                             const Spacer(),
                             Icon(
-                              PhosphorIcons.wifiHigh(
-                                PhosphorIconsStyle.regular,
-                              ),
+                              AppIcons.contactless,
                               color: AppColors.cardMutedText,
                               size: 21,
                             ),
@@ -1063,7 +1060,7 @@ class SavingTile extends StatelessWidget {
                   gradient: AppColors.savingIconGradient,
                 ),
                 child: Icon(
-                  PhosphorIcons.gameController(PhosphorIconsStyle.regular),
+                  AppIcons.gameController,
                   color: AppColors.gold,
                   size: 27,
                 ),
@@ -1197,7 +1194,7 @@ class _ProgressRingPainter extends CustomPainter {
   }
 }
 
-class FloatingNavBar extends StatelessWidget {
+class FloatingNavBar extends StatefulWidget {
   const FloatingNavBar({
     super.key,
     required this.onHistory,
@@ -1206,6 +1203,31 @@ class FloatingNavBar extends StatelessWidget {
 
   final VoidCallback onHistory;
   final VoidCallback onVerifiedUsers;
+
+  @override
+  State<FloatingNavBar> createState() => _FloatingNavBarState();
+}
+
+class _FloatingNavBarState extends State<FloatingNavBar> {
+  int _selectedIndex = 0;
+  Timer? _selectionReset;
+
+  void _selectItem(int index, VoidCallback? onTap) {
+    _selectionReset?.cancel();
+    setState(() => _selectedIndex = index);
+    onTap?.call();
+    if (index != 0) {
+      _selectionReset = Timer(const Duration(milliseconds: 600), () {
+        if (mounted) setState(() => _selectedIndex = 0);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _selectionReset?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1228,38 +1250,67 @@ class FloatingNavBar extends StatelessWidget {
               ),
             ],
           ),
-          child: Row(
+          child: Stack(
             children: [
-              const Expanded(
-                child: _NavItem(
-                  label: 'Home',
-                  icon: PhosphorIconsRegular.house,
-                  selectedIcon: PhosphorIconsFill.house,
-                  selected: true,
+              Positioned.fill(
+                child: AnimatedAlign(
+                  alignment: Alignment(-1 + _selectedIndex * 2 / 3, 0),
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOutCubic,
+                  child: FractionallySizedBox(
+                    widthFactor: .25,
+                    heightFactor: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(2),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: AppColors.navActive,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              Expanded(
-                child: _NavItem(
-                  label: 'History',
-                  icon: PhosphorIconsRegular.clockCounterClockwise,
-                  selectedIcon: PhosphorIconsFill.clockCounterClockwise,
-                  onTap: onHistory,
-                ),
-              ),
-              const Expanded(
-                child: _NavItem(
-                  label: 'Statistics',
-                  icon: PhosphorIconsRegular.chartBar,
-                  selectedIcon: PhosphorIconsFill.chartBar,
-                ),
-              ),
-              Expanded(
-                child: _NavItem(
-                  label: 'Verified users',
-                  icon: PhosphorIconsRegular.sealCheck,
-                  selectedIcon: PhosphorIconsFill.sealCheck,
-                  onTap: onVerifiedUsers,
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: _NavItem(
+                      label: 'Home',
+                      icon: AppIcons.house,
+                      selectedIcon: AppIcons.houseFill,
+                      selected: _selectedIndex == 0,
+                      onTap: () => _selectItem(0, null),
+                    ),
+                  ),
+                  Expanded(
+                    child: _NavItem(
+                      label: 'History',
+                      icon: AppIcons.history,
+                      selectedIcon: AppIcons.historyFill,
+                      selected: _selectedIndex == 1,
+                      onTap: () => _selectItem(1, widget.onHistory),
+                    ),
+                  ),
+                  Expanded(
+                    child: _NavItem(
+                      label: 'Statistics',
+                      icon: AppIcons.chartBar,
+                      selectedIcon: AppIcons.chartBarFill,
+                      selected: _selectedIndex == 2,
+                      onTap: () => _selectItem(2, null),
+                    ),
+                  ),
+                  Expanded(
+                    child: _NavItem(
+                      label: 'Verified users',
+                      icon: AppIcons.sealCheck,
+                      selectedIcon: AppIcons.sealCheckFill,
+                      selected: _selectedIndex == 3,
+                      onTap: () => _selectItem(3, widget.onVerifiedUsers),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -1274,29 +1325,23 @@ class _NavItem extends StatelessWidget {
     required this.label,
     required this.icon,
     required this.selectedIcon,
-    this.selected = false,
-    this.onTap,
+    required this.selected,
+    required this.onTap,
   });
 
   final String label;
   final IconData icon;
   final IconData selectedIcon;
   final bool selected;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return _PressScale(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: onTap ?? () {},
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic,
-          decoration: BoxDecoration(
-            color: selected ? AppColors.navActive : AppColors.transparent,
-            borderRadius: BorderRadius.circular(24),
-          ),
+        onTap: onTap,
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 6),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -1356,8 +1401,8 @@ class _PressScaleState extends State<_PressScale> {
 }
 
 String _formatCurrency(double amount) {
-  final wholeAmount = amount.floor();
-  final wholeDigits = wholeAmount.toString();
+  final totalCents = (amount * 100).round();
+  final wholeDigits = (totalCents ~/ 100).toString();
   final grouped = StringBuffer();
   for (var index = 0; index < wholeDigits.length; index++) {
     if (index > 0 && (wholeDigits.length - index) % 3 == 0) {
@@ -1365,6 +1410,6 @@ String _formatCurrency(double amount) {
     }
     grouped.write(wholeDigits[index]);
   }
-  final cents = ((amount - wholeAmount) * 100).round().clamp(0, 99);
+  final cents = totalCents % 100;
   return '\$${grouped.toString()}.${cents.toString().padLeft(2, '0')}';
 }
